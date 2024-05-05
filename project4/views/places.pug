@@ -1,0 +1,43 @@
+doctype html 
+html
+    head 
+        title Places 
+        meta(name="viewport", content="width=device=width,initial-scale=1")
+        link(href="/places.css", rel="stylesheet" type="text/css")
+        link(href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css", rel="stylesheet" type="text/css")
+        script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC",crossorigin="anonymous")
+
+    body 
+        
+        .container
+        div(class="row")
+            div(class="col")
+                div(id="map-container") 
+                    div(id="map" )
+            div(class="col")
+                h1.mt-3 Places 
+                
+                form.form
+                    .mb-3 
+                        label(for="label") Label 
+                        input#label.form-control(type='text')
+                    .mb-3 
+                        label(for="address") Address 
+                        input#address.form-control(type='text')
+                    button.btn.btn-primary(type='button', onclick='addPlace()') Add Place
+
+                table.table 
+                    thead   
+                        tr  
+                            th Label 
+                            th Address 
+                            th Latitude
+                            th Longitude
+                    tbody
+
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin="anonymous")
+        script(src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js")
+        script(src="/places.js")
+        script. 
+            loadPlaces()
