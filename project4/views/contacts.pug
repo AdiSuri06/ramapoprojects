@@ -1,0 +1,42 @@
+doctype html 
+html
+head 
+title Contact List 
+meta(name="viewport", content="width=device=width,initial-scale=1")
+link(href="/places.css", rel="stylesheet" type="text/css")
+link(href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css", rel="stylesheet" type="text/css")
+script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC",crossorigin="anonymous")
+
+link(rel='stylesheet', type='text/css', href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css')
+body
+	if !hide_login
+		if user 
+			span Logged in User: 
+			b #{user.username}  
+			a(href='/logout' class="btn btn-primary" style='margin-left:85%' ) Sign out
+		else
+			a(href='/login' class="btn btn-primary" style='margin-left:85%' ) Sign in 
+
+.container
+
+h1.mt-3 Contact List 
+
+form.form
+.mb-3 
+
+button.btn.btn-primary(type='button', onclick='addPlace()')  New contact
+
+table.table 
+thead   
+
+tbody
+
+div(id="map-container") 
+	div(id="map" )
+
+script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin="anonymous")
+script(src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js")
+script(src="/places.js")
+script. 
+	loadPlaces()

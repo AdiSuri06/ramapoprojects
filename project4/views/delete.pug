@@ -1,0 +1,21 @@
+extends layout.pug
+
+block content
+
+  head
+    title Delete contact
+  body
+  .container( class = "card bg-light")
+    h1(class = "mb-4") Delete contact
+
+    each g in contacts
+      fieldset(class="mb-4")
+      h2 #{g.firstname + " " + g.lastname}
+      fieldset(class="mb-4")
+      p Are you sure you want to delete this contact? 
+      fieldset(class="mb-4")
+      form(action="/" + g.id + "/delete", method="post")
+      
+        p 
+          button(type="submit")  &nbsp;Yes&nbsp; 
+          a(href="/") Nevermind      

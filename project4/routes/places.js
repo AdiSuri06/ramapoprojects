@@ -3,11 +3,11 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const places = await req.db.findPlaces();
-    res.json({ places: places });
+    res.json({ contacts: places });
 });
 
 router.put('/', async (req, res) => {
-    const location = await req.geocoder.geocode(req.body.address); 
+    const location = await req.geocoder.geocode(req.body.address);
     const id = await req.db.createPlace(req.body.label, req.body.address,location);
     res.json({ id: id });
 });

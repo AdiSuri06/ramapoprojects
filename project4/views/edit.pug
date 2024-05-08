@@ -1,0 +1,55 @@
+extends layout.pug
+block content
+
+  head
+    title Update contact
+    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css", rel="stylesheet")
+  body
+  .container
+    
+    each g in contacts 
+      h2 Update contact
+      form(action="/" + g.id + "/edit", method="post" class = "card bg-light")
+        
+          fieldset(class="border p-2")
+            legend( class="w-auto px-2")  Basic Info
+            .form-group(class="col-md-6")
+              label(for="first") First Name:
+              input( class="form-control" name="firstname" id="first" value=g.firstname type="text")
+            .form-group(class="col-md-6")
+              label(for="last") Last Name:
+              input(  class="form-control" name="lastname" value=g.lastname id="last")
+            .form-group(class="col-md-6")
+              label(for="phone") Phone:
+              input(  class="form-control" type="phone", name="phonenumber" value=g.phonenumber id="phone")
+            .form-group(class="col-md-6")
+              label(for="email") Email:
+              input(  class="form-control" type="email", name="emailaddress" value=g.emailaddress id="email")
+          fieldset(class="border p-2")
+            legend( class="w-auto px-2")  Address
+            .form-group(class="col-md-6")
+              label(for="street") Street:
+              input( class="form-control"  name="street" value=g.street)
+            .form-group(class="col-md-6")
+              label(for="city") City:
+              input(  class="form-control" name="city" value=g.city)
+            .form-group(class="col-md-6")
+              label(for="state") State:
+              input(  class="form-control" name="state" value=g.state)
+            .form-group(class="col-md-6")
+              label(for="zip") Zip:
+              input( class="form-control"  name="zip" value=g.zip)
+            .form-group(class="col-md-6")
+              label(for="country") Country:
+              input(  class="form-control" name="country" value=g.country)
+          fieldset(class="border p-2")
+            legend( class="w-auto px-2")  Contact Preferences
+            .form-group(class="col-md-6")
+              input(  type="checkbox", name="contact_by_phone" checked=g.contact_by_phone)
+              label(for="contact_by_phone") Contact by phone
+            .form-group(class="col-md-6")
+              input(  type="checkbox", name="contact_by_email" checked=g.contact_by_email)
+              label(for="contact_by_email") Contact by email
+          p 
+            button(type="submit" ) Save
+            a(href="/"  style='margin-left:20px') Cancel      

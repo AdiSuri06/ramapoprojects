@@ -1,0 +1,34 @@
+extends layout.pug
+block content
+    tbody 
+    .container(class = "card bg-light") 
+        each g in contacts 
+            h1  #{g.firstname + " " + g.lastname} 
+            hr  
+            a(href="/") Back to list
+            p 
+                b Phone number: 
+                span #{g.phonenumber}  
+                p 
+                    i May 
+                        if g.contact_by_phone==undefined  
+                            span NOT 
+                        span be contacted by phone or text
+            hr 
+            p 
+                b Email address #{g.emailaddress}
+                p 
+                    i May 
+                        if g.contact_by_email==undefined  
+                            span NOT 
+                        span be contacted by email
+            hr  
+            p 
+                b Address: 
+                br
+                section #{g.street}
+                section #{g.city +", " + g.state +" " + g.zip} 
+                section #{g.country}
+            hr  
+            a(href="/"+g.id +"/edit") Edit contact
+            a(href="/"+g.id + "/delete") Delete contact

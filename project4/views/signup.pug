@@ -1,0 +1,35 @@
+extends layout.pug
+
+block content
+    .container( class = "card bg-light")
+    h1 Sign up 
+
+    p
+        span Please select a username, and a password.
+        form(action='/signup', method='post' class = "card p-3 bg-light")
+          fieldset(class="border p-2")  
+            .form-group(class="col-md-6")
+                label(for='firstname') First Name
+                input(class="form-control" type='text', placeholder='firstname', name='firstname')
+            .form-group(class="col-md-6")
+                label(for='lastname') Last Name
+                input( class="form-control" type='text', placeholder='lastname', name='lastname')
+                label(for='username') Username
+                input( class="form-control" type='text', placeholder='username', name='username')
+            
+            .form-group(class="col-md-6")
+                label(for='password') Password 
+                input( class="form-control" type='password', name='password')
+            .form-group(class="col-md-6")
+                label(for='password2') Confirm Password
+                input(class="form-control" type='password', name='password2')
+            p
+                button(type='submit'  class="btn btn-primary") Sign up
+                a(href='/'  style='margin-left:20px' ) Nevermind
+            if message 
+                p #{message}
+        
+            p
+                span Already have an account? 
+                p
+                    a(href='/login' class="btn btn-primary")   Sign in here!

@@ -1,0 +1,21 @@
+extends layout.pug
+
+block content
+    
+    .container( class = "card bg-light")
+        h1 Sign in 
+        form(action='/login', method='post' )
+            label(for='username') Username 
+            input(type='text', placeholder='Username', name='username')
+            br
+            label(for='password') Password&nbsp;
+            input(type='password', name='password')
+            br
+            button(type='submit' class="btn btn-primary") Sign in 
+            a(href='/'  style='margin-left:20px') Nevermind
+            if message  
+                p #{message}
+        
+        p   
+            span Don't have an account yet? 
+            a(href='/signup' class="btn btn-secondary") Sign up here!
