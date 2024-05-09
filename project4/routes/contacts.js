@@ -49,7 +49,6 @@ router.post('/create',  async (req, res) => {
 router.post('/:contactId/edit',  async (req, res) => {
     const userId = req.session.user ? req.session.user.id : -1;
     var fullAddress = req.body.street +", " + req.body.city + ", " + req.body.state + " " +  req.body.zip;
-    console.log(fullAddress +"sad");
     const location = await req.geocoder.geocode(fullAddress);
     if (location.length>0)
 	{

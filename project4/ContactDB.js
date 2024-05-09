@@ -56,7 +56,7 @@ class ContactsDB {
 		{
 			lat= location[0].latitude;
 			long = location[0].longitude;
-			console.log(lat + ":"+ long);
+
 		}
         const id = await this.db.create('Contacts', [
             { column: 'firstname', value: firstname },
@@ -158,7 +158,7 @@ class ContactsDB {
 
 	    async createPlace(label, location) {
 	        var lat,long;
-	        console.log(location);
+
 	        if (location.length>0)
 	        {
 	            console.log(location[0].lat + ":" + location[0].long);
