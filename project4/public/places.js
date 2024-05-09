@@ -9,7 +9,7 @@ const on_row_click = (e) =>
 {
 
     let row = e.target;
-    if (e.target.tagName.toUpperCase() === 'TD')
+    if (e.target.tagName.toUpperCase() === 'TD' )
     {
         row = e.target.parentNode;
     }
@@ -17,6 +17,7 @@ const on_row_click = (e) =>
     const long = row.dataset.long;
     if(lat  && long)
     map.flyTo(new L.LatLng(lat, long));
+
 }
 
 const addPlace = async () => {
@@ -39,6 +40,8 @@ const loadPlaces = async () => {
     if (response && response.data && response.data.contacts) {
         for (const g of response.data.contacts) {
 			if(!g.lat || !g.long) continue;
+			if(g.contact_by_email) g.contact_by_email='Checked'
+			if(g.contact_by_phone) g.contact_by_phone='Checked'
             marker = L.marker([g.lat, g.long]).addTo(map) .bindPopup(`<b>${g.firstname + " " + g.lastname}</b>`);
             markers.push(marker);
             const tr = document.createElement('tr');
@@ -46,23 +49,25 @@ const loadPlaces = async () => {
             tr.onclick = on_row_click;
             tr.innerHTML = `
 
-				<td> <a href="/${g.id}" > ${g.firstname} &nbsp;  &nbsp;  ${g.lastname}</td>
+				<td> <a href="/${g.id}"> ${g.firstname} &nbsp; ${g.lastname}</a></td>
 				<td>
-				<section> ${g.phonenumber}</section>
-				<section> ${g.emailaddress}</section>
-				</td><td>
-				<section> ${g.street}</section>
-				<section> ${g.city +", " + g.state +" " + g.zip}</section>
-				<section> ${g.country}</section>
-				</td><td>
-				<section>
-				<input checked=${g.contact_by_phone} name="contact_by_phone" type="checkbox" disabled value="true" />
-				<label(for="contact_by_phone")> Phone
+				 ${g.phonenumber}
+				 ${g.emailaddress}
+				</td>
+				<td>
 
-				</section><section>
-				<input checked=${g.contact_by_email} name="contact_by_email" type="checkbox" disabled value="true"/>
-				<label(for="contact_by_email")> Email
-                </section>
+				 ${g.street}
+				 ${g.city +", " + g.state +" " + g.zip}
+				 ${g.country}
+				</td>
+
+				<td>
+				<input  ${g.contact_by_phone} name="contact_by_phone" type="checkbox" disabled  />
+				<label for="contact_by_phone"> Phone </label>
+				<input ${g.contact_by_email} name="contact_by_email" type="checkbox" disabled />
+				<label for="contact_by_email"> Email</label>
+                </td>
+
             `;
             tbody.appendChild(tr);
         }
