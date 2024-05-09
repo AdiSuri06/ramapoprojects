@@ -27,19 +27,18 @@ const addPlace = async () => {
 }
 
 const deletePlace = async (id) => {
-    await axios.delete(`/places/${id}`);
+	await axios.delete(`/places/${id}`);
     for (var i = 0; i < markers.length; i++) { map.removeLayer(markers[i]); }
     await loadPlaces();
 }
 
 const loadPlaces = async () => {
     const response = await axios.get('/places');
-    const tbody = document.querySelector('body');
-	console.log(response +  "" + response.data +"" + response.data.contacts);
-
+    const tbody = document.querySelector('tbody');
 
     if (response && response.data && response.data.contacts) {
         for (const g of response.data.contacts) {
+			if(!g.lat || !g.long) continue;
             marker = L.marker([g.lat, g.long]).addTo(map) .bindPopup(`<b>${g.firstname + " " + g.lastname}</b>`);
             markers.push(marker);
             const tr = document.createElement('tr');
@@ -47,7 +46,7 @@ const loadPlaces = async () => {
             tr.onclick = on_row_click;
             tr.innerHTML = `
 
-				<td> <a(href="/"+${g.id})> ${g.firstname} &nbsp;  &nbsp;  ${g.lastname}</td>
+				<td> <a href="/${g.id}" > ${g.firstname} &nbsp;  &nbsp;  ${g.lastname}</td>
 				<td>
 				<section> ${g.phonenumber}</section>
 				<section> ${g.emailaddress}</section>
@@ -57,16 +56,12 @@ const loadPlaces = async () => {
 				<section> ${g.country}</section>
 				</td><td>
 				<section>
-				<input(checked=${g.contact_by_phone} name="contact_by_phone" type="checkbox" disabled value="true")/>
+				<input checked=${g.contact_by_phone} name="contact_by_phone" type="checkbox" disabled value="true" />
 				<label(for="contact_by_phone")> Phone
 
 				</section><section>
-				<input(checked=${g.contact_by_email} name="contact_by_email" type="checkbox" disabled value="true" )/>
+				<input checked=${g.contact_by_email} name="contact_by_email" type="checkbox" disabled value="true"/>
 				<label(for="contact_by_email")> Email
-
-                <td>
-                    <button class='btn btn-danger' onclick='deletePlace(${g.id})'>Delete</button>
-                </td>
                 </section>
             `;
             tbody.appendChild(tr);

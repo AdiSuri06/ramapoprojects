@@ -45,14 +45,7 @@ class ContactsDB {
             { name: 'lastname', type: 'TEXT' },
             { name: 'username', type: 'TEXT' }
         ], 'id');
-		await this.db.schema('Place', [
-            { name: 'id', type: 'INTEGER' },
-            { name: 'label', type: 'TEXT' },
-            { name: 'lat', type: 'TEXT' },
-            { name: 'long', type: 'TEXT' }
-
-        ], 'id');
-        await this.createcmps369User();
+		await this.createcmps369User();
 
     }
 
@@ -61,9 +54,9 @@ class ContactsDB {
 
 		if (location.length>0)
 		{
-			console.log(location[0].lat + ":" + location[0].long);
 			lat= location[0].latitude;
 			long = location[0].longitude;
+			console.log(lat + ":"+ long);
 		}
         const id = await this.db.create('Contacts', [
             { column: 'firstname', value: firstname },
@@ -135,10 +128,10 @@ class ContactsDB {
     async updateContactByContactId(id , firstname,lastname,phonenumber,emailaddress,street,city,state,zip,country, contact_by_email,contact_by_phone,location ) {
 		var lat,long;
 		if (location.length>0)
-			{
-				console.log(location[0].lat + ":" + location[0].long);
+		{
 				lat= location[0].latitude;
 				long = location[0].longitude;
+				console.log(lat + ":" + long) ;
 		}
         const status = await this.db.update('Contacts',[
             { column: 'firstname', value: firstname },
@@ -151,9 +144,9 @@ class ContactsDB {
             { column: 'zip', value: zip },
             { column: 'country', value: country },
             { column: 'contact_by_email', value: contact_by_email },
-            { column: 'contact_by_phone', value: contact_by_phone }],
+            { column: 'contact_by_phone', value: contact_by_phone },
             { column: 'lat', value: lat},
-            { column: 'long', value: long }
+            { column: 'long', value: long }],
             [{ column: 'id', value: id }]
         )
         return status;
